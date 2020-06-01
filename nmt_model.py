@@ -169,7 +169,6 @@ class NMT(nn.Module):
         init_decoder_cell = self.c_projection(torch.cat([last_cell[0], last_cell[1]], 1))
         dec_init_state = (init_decoder_hidden, init_decoder_cell)
 
-        ### END YOUR CODE
 
         return enc_hiddens, dec_init_state
 
@@ -202,7 +201,6 @@ class NMT(nn.Module):
         # Initialize a list we will use to collect the combined output o_t on each step
         combined_outputs = []
 
-        ### YOUR CODE HERE (~9 Lines)
         ### TODO:
         ###     1. Apply the attention projection layer to `enc_hiddens` to obtain `enc_hiddens_proj`,
         ###         which should be shape (b, src_len, h),
@@ -249,7 +247,6 @@ class NMT(nn.Module):
             o_prev = o_t
 
         combined_outputs = torch.stack(combined_outputs, dim=0)
-        ### END YOUR CODE
 
         return combined_outputs
 
@@ -282,7 +279,7 @@ class NMT(nn.Module):
 
         combined_output = None
 
-        ### YOUR CODE HERE (~3 Lines)
+
         ### TODO:
         ###     1. Apply the decoder to `Ybar_t` and `dec_state`to obtain the new dec_state.
         ###     2. Split dec_state into its two parts (dec_hidden, dec_cell)
@@ -294,13 +291,11 @@ class NMT(nn.Module):
         dec_state = (dec_hidden, dec_cell)
         e_t = torch.bmm(enc_hiddens_proj, torch.unsqueeze(dec_hidden, 2))
         e_t = torch.squeeze(e_t, 2)
-        ### END YOUR CODE
 
         # Set e_t to -inf where enc_masks has 1
         if enc_masks is not None:
             e_t.data.masked_fill_(enc_masks.bool(), -float('inf'))
 
-        ### YOUR CODE HERE (~6 Lines)
         ### TODO:
         ###     1. Apply softmax to e_t to yield alpha_t
         ###     2. Use batched matrix multiplication between alpha_t and enc_hiddens to obtain the
@@ -329,7 +324,6 @@ class NMT(nn.Module):
         V_t = self.combined_output_projection(U_t)
 
         O_t = self.dropout(torch.tanh(V_t))
-        ### END YOUR CODE
 
         combined_output = O_t
         return dec_state, combined_output, e_t
