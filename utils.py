@@ -20,7 +20,6 @@ def pad_sents(sents, pad_token):
     """
     sents_padded = []
 
-    ### YOUR CODE HERE (~6 Lines)
     size = len(max(sents, key=len))
     for sent in sents:
         gap = size - len(sent)
@@ -28,8 +27,6 @@ def pad_sents(sents, pad_token):
             pad = [pad_token for i in range(gap)]
             sent.extend(pad)
         sents_padded.append(sent)
-
-    ### END YOUR CODE
 
     return sents_padded
 
@@ -121,13 +118,6 @@ def load_data(train_file, valid_file, test_file, device, BATCH_SIZE=128, use_pos
         sort_within_batch=True,
         sort_key=lambda x: len(x.src),
         device=device)
-
-    # test_iterator = BucketIterator.splits(
-    #     test_data,
-    #     batch_size=1,
-    #     sort_within_batch=True,
-    #     sort_key=lambda x: len(x.src),
-    #     device=device)
 
     return SRC, TRG, train_iterator, valid_iterator, test_iterator
 
