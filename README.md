@@ -8,9 +8,9 @@ Install:
 3. Download spaCy English model: python -m spacy download en
 
 
-Run Experiement (Training and Testing) of a Configurtion :
+Run Experiement (Training and Testing) of a Configurtion:
 1. uncomment command line  corresponding the configuration in run.sh.
 2. run command: sh run.sh
 
 Paper: 
-Improving Sequence-to-Sequence Semantic Parser for Task Oriented Dialog: https://aclanthology.org/2020.intexsempar-1.3/
+1. Improving Sequence-to-Sequence Semantic Parser for Task Oriented Dialog: https://aclanthology.org/2020.intexsempar-1.3/
